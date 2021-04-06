@@ -1,5 +1,5 @@
 //controller layer
-const alarmService = require('../../services/realTimeErr.service');
+const alarmService = require('../../services/realTimeErr/realTimeErr.service');
 
 /**
  * 기존 URL: /RestGMS/alarm/current

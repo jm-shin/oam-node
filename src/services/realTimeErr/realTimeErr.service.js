@@ -1,6 +1,6 @@
 //service layer
-const Alarm = require('../model/alram');
-const AlarmType = require('../model/alram_type');
+const Alarm = require('../../model/alram');
+const AlarmType = require('../../model/alram_type');
 
 const location = '[location]' + __dirname;
 

@@ -1,5 +1,5 @@
-const mysqlConfig = require('../config/db_info').mysql;
-const pool = require('mysql').createPool(mysqlConfig);
+const dbConfig = require('../config/db_info').mysql;
+const pool = require('mysql').createPool(dbConfig);
 
 export const getAlarmTypes = () => {
     return new Promise((resolve, reject) => {
