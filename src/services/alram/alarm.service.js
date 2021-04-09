@@ -5,7 +5,7 @@ const AlarmType = require('../../model/alram_type');
 const location = '[location]' + __dirname;
 
 export const list = async () => {
-    console.log('services/realTimeErr.service');
+    console.log('services/alarm.service');
 
     let alarmList = [];
     await Alarm.getCurrentAlarm().then(result => {

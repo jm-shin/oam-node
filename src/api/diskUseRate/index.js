@@ -1,6 +1,6 @@
 //diskUseRateRouter
 const diskUseRateRouter = require('express').Router();
-const diskUseRateCtrl = require('./diskUseRate.ctrl');
+const diskUseRateCtrl = require('./diskUseRate.controller');
 
 diskUseRateRouter.get('/list', diskUseRateCtrl.getDiskUseRateList);
 

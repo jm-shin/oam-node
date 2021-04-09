@@ -1,10 +1,12 @@
 const express = require('express');
 
 const apiRouter = express.Router();
-const realTimeRouter = require('./realTimeErr');
+const alarmRouter = require('./alarm');
 const diskUseRateRouter = require('./diskUseRate');
+const restGmsRouter = require('./RestGMS');
 
-apiRouter.use('/realTimeErr', realTimeRouter);
-apiRouter.use('/diskUseRate', diskUseRateRouter)
+apiRouter.use('/alarm', alarmRouter);
+apiRouter.use('/disk-use-rate', diskUseRateRouter);
+apiRouter.use('/gms', restGmsRouter);
 
 module.exports = apiRouter;

@@ -1,15 +1,14 @@
 //controller layer
-const alarmService = require('../../services/realTimeErr/realTimeErr.service');
+const alarmService = require('../../services/alram/alarm.service');
 
 /**
  * 기존 URL: /RestGMS/alarm/current
- * 변경된 URL: /api/realTimeErr
+ * 변경된 URL: /api/alarm
  */
 exports.list = async (req, res) => {
     console.log('[log] realTimErr Controller');
 
-    let alarmList = [];
-    alarmList = await alarmService.list();
+    const alarmList = await alarmService.list();
 
     res.send(alarmList);
     res.end();
@@ -18,13 +17,12 @@ exports.list = async (req, res) => {
 /**
  * alarm type list 가져오기
  * 기존 url: /RestGMS/alarmoption/alarmtype
- * 변경: /api/realTimeErr/type
+ * 변경: /api/alarm/type
  */
 
 exports.alarmTypeList = async (req, res) => {
 
-    let alarmTypeList = [];
-    alarmTypeList = await alarmService.alarmTypes();
+    const alarmTypeList = await alarmService.alarmTypes();
 
     res.send(alarmTypeList);
     res.end();

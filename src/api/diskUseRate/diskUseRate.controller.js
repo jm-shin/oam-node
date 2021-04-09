@@ -3,8 +3,8 @@ const diskUseRateService = require('../../services/diskUseRate/diskUseRate.servi
 exports.getDiskUseRateList = async (req, res) => {
     let resultArr = [];
 
-    let serverInfoList = await diskUseRateService.getServerInfo();
-    let systemStatList = await diskUseRateService.getSystemStat();
+    const serverInfoList = await diskUseRateService.getServerInfo();
+    const systemStatList = await diskUseRateService.getSystemStat();
 
     await serverInfoList.forEach((serVal) => {
          systemStatList.forEach((sysVal) => {
@@ -12,7 +12,7 @@ exports.getDiskUseRateList = async (req, res) => {
                 //delete serVal.server_instance_id;
                 const tmp = { ...serVal, ...sysVal };
                 resultArr.push(tmp);
-            }
+            };
         });
     });
     res.send(resultArr);
