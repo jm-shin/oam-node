@@ -8,7 +8,7 @@ export const list = async () => {
     console.log('services/alarm.service');
 
     let alarmList = [];
-    await Alarm.getCurrentAlarm().then(result => {
+    await Alarm.selectCurrent().then(result => {
         alarmList = result;
     });
 
@@ -43,7 +43,7 @@ export const alarmTypes = async () => {
     console.log(location, '[func] alarmTypes');
 
     let alarmTypes = [];
-    await AlarmType.getAlarmTypes().then(result => {
+    await AlarmType.selectAll().then(result => {
        alarmTypes = result;
     });
 

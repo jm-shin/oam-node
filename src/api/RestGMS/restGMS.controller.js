@@ -17,3 +17,15 @@ exports.getSystemStatList = async (req, res) => {
     res.send(systemStatList);
     res.end();
 };
+
+exports.getHaStatusList = async (req, res) => {
+    const haStatusList = await restGmsService.getStatHa();
+    res.send(haStatusList);
+    res.end();
+};
+
+exports.getProcStatusList = async (req, res) => {
+    const procStatusList = await  restGmsService.getProcStatList();
+    res.send(procStatusList);
+    res.end();
+};

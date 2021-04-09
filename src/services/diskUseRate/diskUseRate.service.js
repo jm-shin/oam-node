@@ -3,11 +3,11 @@ const statusSystem = require('../../model/status_system');
 
 export const getServerInfo = async () => {
     let gvServerInfoList = [];
-    await gvServerInfo.getServerInfo().then(result => {
+    await gvServerInfo.selectAll().then(result => {
         gvServerInfoList = result;
     });
 
-    const converting = gvServerInfoList.reduce((acc, cur) => {
+    const result = gvServerInfoList.reduce((acc, cur) => {
        let tmp = {
            server_instance_id: cur.SERVER_INSTANCE_NAME,
            server_instance_name: cur.SERVER_INSTANCE_ID,
@@ -25,16 +25,16 @@ export const getServerInfo = async () => {
        return acc;
     }, []);
 
-    return converting;
+    return result;
 };
 
 export const getSystemStat = async () => {
-    let systemStatList = [];
+    let statusSystemList = [];
     await statusSystem.selectAll().then(result => {
-        systemStatList = result;
+        statusSystemList = result;
     });
 
-    const convertName = systemStatList.reduce((acc, cur) => {
+    const result = statusSystemList.reduce((acc, cur) => {
         let tmp = {
             systemId: cur.SYSTEM_INSTANCE_ID,
             serverId: cur.SERVER_INSTANCE_ID,
@@ -55,5 +55,5 @@ export const getSystemStat = async () => {
         return acc;
     }, []);
 
-    return convertName;
+    return result;
 };

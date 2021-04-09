@@ -1,11 +1,11 @@
 const PartitionInfo = require('../../model/partition_info');
 const gvServerInfo = require('../../model/gv_server_info');
 const statusSystem = require('../../model/status_system');
+const statusHa = require('../../model/status_ha');
+const statusProc = require('../../model/status_proc');
 
-exports.getDiskPartInfoList = async () => {
-
-    const diskPartList = await PartitionInfo.getPartitionInfo();
-
+const getDiskPartInfoList = async () => {
+    const diskPartList = await PartitionInfo.selectAll();
     const result = diskPartList.reduce((acc, cur) => {
        let tmp = {
            systemId: cur.SYSTEM_INSTANCE_ID,
@@ -21,8 +21,8 @@ exports.getDiskPartInfoList = async () => {
     return result;
 };
 
-exports.getServerInfoList = async () => {
-    const gvServerInfoList = await gvServerInfo.getServerInfo();
+const getServerInfoList = async () => {
+    const gvServerInfoList = await gvServerInfo.selectAll();
     const result = gvServerInfoList.reduce((acc, cur) => {
         let tmp = {
             server_instance_id: cur.SERVER_INSTANCE_NAME,
@@ -44,12 +44,8 @@ exports.getServerInfoList = async () => {
     return result;
 };
 
-exports.getSystemStatList = async () => {
-    let systemStatList = [];
-    await statusSystem.selectAll().then(result => {
-        systemStatList = result;
-    });
-
+const getSystemStatList = async () => {
+    const systemStatList = await statusSystem.selectAll();
     const result = systemStatList.reduce((acc, cur) => {
         let tmp = {
             systemId: cur.SYSTEM_INSTANCE_ID,
@@ -73,3 +69,52 @@ exports.getSystemStatList = async () => {
 
     return result;
 };
+
+const getStatHa = async () => {
+    const statusHaList = await statusHa.selectAll();
+    const result = statusHaList.reduce((acc, cur) => {
+       const tmp = {
+           systemId: cur.SYSTEM_INSTANCE_ID,
+           serverId: cur.SERVER_INSTANCE_ID,
+           hbtStatus: cur.HBTSTATUS,
+           mandatoryFlag: cur.MANDATORY_FLAG,
+           ip: cur.IP,
+           name: cur.NAME,
+           infinite_loop_enable: cur.INFINITE_LOOP_ENABLE,
+           infinite_loop_rechecknum: cur.INFINITE_LOOP_RECHECKNUM,
+           infinite_loop_recheckdur: cur.INFINITE_LOOP_RECHCKDUR,
+           proc_rechecknum: cur.PROC_RECHECKNUM,
+           proc_recheckdur: cur.PROC_RECHECKDUR,
+       };
+       acc.push(tmp);
+       return acc;
+    }, []);
+
+    return result;
+};
+
+const getProcStatList = async () => {
+    const procStatList = await statusProc.selectAll();
+    const result = procStatList.reduce((acc, cur) => {
+        const tmp = {
+            systemId: cur.SYSTEM_INSTANCE_ID,
+            serverId: cur.SERVER_INSTANCE_ID,
+            vaild: cur.VALID,
+            pid: cur.PID,
+            ppid: cur.PPID,
+            name: cur.NAME,
+            alias: cur.ALIAS,
+            type: cur.TYPE,
+        };
+        acc.push(tmp);
+        return acc;
+    }, []);
+
+    return result;
+};
+
+module.exports.getDiskPartInfoList = getDiskPartInfoList;
+module.exports.getServerInfoList = getServerInfoList;
+module.exports.getSystemStatList = getSystemStatList;
+module.exports.getStatHa = getStatHa;
+module.exports.getProcStatList = getProcStatList;

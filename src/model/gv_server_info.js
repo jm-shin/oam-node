@@ -1,7 +1,7 @@
 const dbConfig = require('../config/db_info').mysql;
 const pool = require('mysql').createPool(dbConfig);
 
-export const getServerInfo = () => {
+export const selectAll = () => {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, conn) => {
            if (err) {

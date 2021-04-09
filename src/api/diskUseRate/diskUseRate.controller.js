@@ -1,5 +1,9 @@
 const diskUseRateService = require('../../services/diskUseRate/diskUseRate.service');
 
+/**
+ * 기존 URL: /RestGMS/alarm/current
+ * 변경된 URL: /api/alarm
+ */
 exports.getDiskUseRateList = async (req, res) => {
     let resultArr = [];
 
