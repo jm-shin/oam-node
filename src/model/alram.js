@@ -11,12 +11,12 @@ export const selectCurrent = () => {
                     conn.release();
                     reject(err);
                 };
-                const sql = 'SELECT ALARMID, SYSTEM_INSTANCE_ID, SERVER_INSTANCE_ID, HOST_NAME, EVENTTIME, ACKTIME, CLOSETIME, \n' +
-                    '  \t       ALARMTYPE, ALARMCODE, SEVERITY, SOURCE, CAUSE, DESCRIPTION, ACKED, CLOSED, ACKBY, CLOSEBY\n' +
-                    '  \tFROM ALARM\n' +
-                    '  \tWHERE CLOSED = 0 AND SEVERITY != 0\n' +
-                    '  \tORDER BY EVENTTIME DESC\n' +
-                    '  \tLIMIT 1000';
+                const sql = 'SELECT ALARMID, SYSTEM_INSTANCE_ID, SERVER_INSTANCE_ID, HOST_NAME, EVENTTIME, ACKTIME, CLOSETIME,\n' +
+                            'ALARMTYPE, ALARMCODE, SEVERITY, SOURCE, CAUSE, DESCRIPTION, ACKED, CLOSED, ACKBY, CLOSEBY\n' +
+                            'FROM ALARM\n' +
+                            'WHERE CLOSED = 0 AND SEVERITY != 0\n' +
+                            'ORDER BY EVENTTIME DESC\n' +
+                            'LIMIT 1000';
                 conn.query(sql, (err, rows) => {
                     if (err) reject(err);
                     conn.release();

@@ -10,11 +10,11 @@ export const selectAll = () => {
            };
 
            const sql = 'SELECT SYSTEM_INSTANCE_ID, SERVER_INSTANCE_ID, HBTSTATUS, MANDATORY_FLAG, IP, NAME, \n' +
-               '           INFINITE_LOOP_ENABLE, INFINITE_LOOP_RECHECKNUM, INFINITE_LOOP_RECHCKDUR, \n' +
-               '           PROC_RECHECKNUM, PROC_RECHECKDUR \n' +
-               '    FROM STATUS_HA\n' +
-               '    WHERE DATECREATED > DATE_ADD(NOW(), INTERVAL -20 SECOND)\n' +
-               '    ORDER BY SYSTEM_INSTANCE_ID, SERVER_INSTANCE_ID ASC';
+                        'INFINITE_LOOP_ENABLE, INFINITE_LOOP_RECHECKNUM, INFINITE_LOOP_RECHCKDUR, \n' +
+                        'PROC_RECHECKNUM, PROC_RECHECKDUR \n' +
+                        'FROM STATUS_HA\n' +
+                        'WHERE DATECREATED > DATE_ADD(NOW(), INTERVAL -20 SECOND)\n' +
+                        'ORDER BY SYSTEM_INSTANCE_ID, SERVER_INSTANCE_ID ASC';
 
            conn.query(sql, (err, rows) => {
               conn.release();

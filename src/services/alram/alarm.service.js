@@ -2,17 +2,13 @@
 const Alarm = require('../../model/alram');
 const AlarmType = require('../../model/alram_type');
 
-const location = '[location]' + __dirname;
-
 export const list = async () => {
-    console.log('services/alarm.service');
-
-    let alarmList = [];
+    let currentAlarmList = [];
     await Alarm.selectCurrent().then(result => {
-        alarmList = result;
+        currentAlarmList = result;
     });
 
-    const alarmConverting = alarmList.reduce((acc, cur) => {
+    const result = currentAlarmList.reduce((acc, cur) => {
         let tmp = {
             alarmId: cur.ALARMID,
             systemId: cur.SYSTEM_INSTANCE_ID,
@@ -36,25 +32,23 @@ export const list = async () => {
         return acc;
     }, []);
 
-    return alarmConverting;
+    return result;
 };
 
 export const alarmTypes = async () => {
-    console.log(location, '[func] alarmTypes');
-
-    let alarmTypes = [];
+    let alarmTypeList = [];
     await AlarmType.selectAll().then(result => {
-       alarmTypes = result;
+        alarmTypeList = result;
     });
 
-    const alarmTypeList = alarmTypes.reduce((acc, cur) => {
+    const result = alarmTypeList.reduce((acc, cur) => {
         let tmp = {
-            key: cur.ALARMNAME,
-            value: cur.ALARMTYPE,
+            key: cur.ID,
+            value: cur.VALUE.toString(),
         };
         acc.push(tmp);
         return acc;
     }, []);
 
-    return alarmTypeList;
+    return result;
 };

@@ -8,7 +8,9 @@ export const selectAll = () => {
                 conn.release();
                 reject(err);
             }
-            const sql = 'SELECT * FROM ALARM_TYPE';
+            const sql = 'SELECT ALARMNAME AS ID, ALARMTYPE AS VALUE\n' +
+                        'FROM ALARM_TYPE\n' +
+                        'ORDER BY ALARMNAME ASC';
             conn.query(sql, (err, rows) => {
                 if (err) reject(err);
                 conn.release();
