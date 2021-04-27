@@ -25,5 +25,4 @@ exports.alarmTypeList = async (req, res) => {
     const alarmTypeList = await alarmService.alarmTypes();
 
     res.send(alarmTypeList);
-    res.end();
 };
