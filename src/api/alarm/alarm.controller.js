@@ -6,10 +6,7 @@ const alarmService = require('../../services/alram/alarm.service');
  * 변경된 URL: /api/alarm
  */
 exports.list = async (req, res) => {
-    console.log('[log] realTimErr Controller');
-
     const alarmList = await alarmService.list();
-
     res.send(alarmList);
     res.end();
 };
@@ -21,8 +18,6 @@ exports.list = async (req, res) => {
  */
 
 exports.alarmTypeList = async (req, res) => {
-
     const alarmTypeList = await alarmService.alarmTypes();
-
     res.send(alarmTypeList);
 };
