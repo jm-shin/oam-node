@@ -121,11 +121,11 @@ export const getDiskUseRateList = async () => {
         }
         if (flag == false) {
             const tmp = {
-                server_instance_id: null,
+                server_instance_id: uniqueServerId[i],
                 server_instance_name: null,
                 server_instance_state: null,
                 vdu_id: null,
-                system_instance_id: uniqueServerId[i],
+                system_instance_id: null,
                 vm_id: null,
                 vm_state: null,
                 host_name: null,
